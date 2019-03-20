@@ -2,12 +2,14 @@ const express = require('express');
 const helmet = require('helmet');
 const postsRouter = require('./posts/posts-router');
 const usersRouter = require('./users/users-router');
+const nameToUpperCase = require('./data/middleware/nameToUpperCase')
 
 const server = express();
 
 // middleware
 server.use(express.json());
 server.use(helmet());
+server.use(nameToUpperCase);
 
 // Routing
 server.use('/api/posts', postsRouter);

@@ -1,16 +1,17 @@
 const express = require('express');
-
+const nameToUpperCase = require('../data/middleware/nameToUpperCase')
 const router = express.Router();
 
 const db = require('../data/helpers/userDb')
 
-router.post('/', (req, res) => {
+router.post('/', nameToUpperCase, (req, res) => {
     const userInfo = req.body;
+    console.log(req.body)
     !userInfo.name
     ? res
         .status(400).json({ errorMessage: "Please provide a name for the user." })
     : db 
-        .insert(userInfo)
+        .insert({ name: req.body.name })
         .then(user => {
             res.status(201).json(user);
         })
@@ -106,5 +107,29 @@ router.put('/:id', (req, res) => {
                 .json({ error: "The post information could not be modified." })
         })
 });
+
+router.get('/posts/:userId', (req, res) => {
+    const userId = req.params.userId;
+    db
+        .getUserPosts(userId)
+        .then(userPosts => {
+            if (userPosts === 0) {
+                res
+                    .status(404)
+                    .json({ error: "No posts by that user could be located."})
+            } else {
+                res
+                    .json(userPosts);
+            }
+        })
+        .catch(err => {
+            res
+                .status(500)
+                .json({ error: "Request Failure Occured"})
+        }); 
+});
+
+/////// middleware
+
 
 module.exports = router;
