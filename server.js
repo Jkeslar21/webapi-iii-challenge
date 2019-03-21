@@ -9,7 +9,7 @@ const server = express();
 // middleware
 server.use(express.json());
 server.use(helmet());
-server.use(nameToUpperCase);
+// server.use(nameToUpperCase);
 
 // Routing
 server.use('/api/posts', postsRouter);
