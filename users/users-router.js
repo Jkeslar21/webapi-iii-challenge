@@ -6,7 +6,6 @@ const db = require('../data/helpers/userDb')
 
 router.post('/', nameToUpperCase, (req, res) => {
     const userInfo = req.body;
-    console.log(req.body)
     !userInfo.name
     ? res
         .status(400).json({ errorMessage: "Please provide a name for the user." })

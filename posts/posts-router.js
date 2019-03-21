@@ -5,12 +5,13 @@ const router = express.Router();
 const db = require('../data/helpers/postDb')
 
 router.post('/', (req, res) => {
+    console.log(req.body)
     const postInfo = req.body;
-    !postInfo.text
+    !postInfo.text || !postInfo.user_id
     ? res
-        .status(400).json({ errorMessage: "Please provide text for the post." })
+        .status(400).json({ errorMessage: "Please provide text and a user_id for the post." })
     : db 
-        .insert(postInfo)
+        .insert(req.body)
         .then(post => {
             res.status(201).json(post);
         })
