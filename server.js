@@ -19,8 +19,7 @@ server.use('/api/users', usersRouter);
 // Route Handlers
 server.get('/', (req, res) => {
     res.send(`
-    <h2>Post City</h2>
-    <p>Welcome to the Jungle</p>
+    <h2>Welcome to the Jungle</h2>
     `)
 });
 
