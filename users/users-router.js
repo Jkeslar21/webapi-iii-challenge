@@ -70,13 +70,13 @@ router.delete('/:id', (req, res) => {
 
 router.put('/:id', (req, res) => {
     const id = req.params.id;
-    const postInfo = req.body;
-    !postInfo.title || !postInfo.contents
+    const userInfo = req.body;
+    !userInfo.name
     ? res
         .status(400)
-        .json({ errorMessage: "Please provide title and contents for the post." })
+        .json({ errorMessage: "Please provide a name for the user." })
     : db
-        .update(id, postInfo)
+        .update(id, userInfo)
         .then(count => {
             if (count === 0){
                 res

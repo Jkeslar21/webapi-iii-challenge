@@ -70,10 +70,10 @@ router.delete('/:id', (req, res) => {
 router.put('/:id', (req, res) => {
     const id = req.params.id;
     const postInfo = req.body;
-    !postInfo.title || !postInfo.contents
+    !postInfo.text
     ? res
         .status(400)
-        .json({ errorMessage: "Please provide title and contents for the post." })
+        .json({ errorMessage: "Please provide text content for the post." })
     : db
         .update(id, postInfo)
         .then(count => {
