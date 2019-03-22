@@ -6,3 +6,5 @@ const greeting = process.env.GREETING
 server.listen(port, () => {
     console.log(`\n ** ${greeting} Server Running on http://localhost:${port} **\n`)
 });
+
+// yarn add nodemon --dev
